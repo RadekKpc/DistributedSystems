@@ -1,6 +1,5 @@
 import socket
 import threading
-import pickle
 
 # connection setting
 HOST = '127.0.0.1'
