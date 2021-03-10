@@ -1,3 +1,3 @@
 # DistributedSystems
 
-Jeśli kożystasz daj gwiazdkę <3
+Jeśli korzystasz daj gwiazdkę <3
