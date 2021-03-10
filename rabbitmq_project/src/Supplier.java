@@ -88,15 +88,7 @@ public class Supplier {
             channel.basicConsume(ITEM_QUEUE_NAME, false, itemConsumer);
 
         }
-//        while(true) {
-//            System.out.println("Enter team name");
-//            String team = br.readLine();
-//            System.out.println("Enter message");
-//            String message = br.readLine();
-//            if(team.equals("exit"))break;
-//            channel.basicPublish(Configuration.MESSAGE_EXCHANGER, team, null, message.getBytes());
-//            System.out.println("Message sended.");
-//        }
+
         // close
         //channel.close();
         //connection.close();
