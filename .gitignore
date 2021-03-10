@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,3 +129,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Libs
+**/amqp-client-5.11.0.jar
+**/amqp-client-5.11.0-javadoc.jar
+**/slf4j-api-1.7.29.jar
+**/slf4j-api-1.7.29-javadoc.jar
+**/slf4j-simple-1.6.2.jar
+**/slf4j-simple-1.6.2-javadoc.jar
+
+**/out
