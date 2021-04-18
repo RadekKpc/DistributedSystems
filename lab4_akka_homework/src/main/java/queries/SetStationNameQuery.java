@@ -1,5 +1,7 @@
+package queries;
+
 public class SetStationNameQuery implements StationQuery{
-    String name;
+    public String name;
 
     public SetStationNameQuery(String name) {
         this.name = name;

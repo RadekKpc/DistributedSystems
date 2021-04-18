@@ -1,3 +1,5 @@
+import queries.SatelliteAPI;
+
 import java.util.concurrent.Callable;
 
 public class AsyncStaelliteAPICall implements Callable<SatelliteAPI.Status> {
@@ -9,7 +11,7 @@ public class AsyncStaelliteAPICall implements Callable<SatelliteAPI.Status> {
     }
 
     @Override
-    public SatelliteAPI.Status call() throws Exception {
+    public SatelliteAPI.Status call() {
         return SatelliteAPI.getStatus(satId);
     }
 }

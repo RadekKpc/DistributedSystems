@@ -1,3 +1,5 @@
+package queries;
+
 import java.util.Map;
 
 public class BasicStateResponse implements StationQuery{

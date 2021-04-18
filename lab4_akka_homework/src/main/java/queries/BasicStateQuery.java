@@ -1,6 +1,8 @@
+package queries;
+
 import akka.actor.typed.ActorRef;
 
-public class BasicStateQuery {
+public class BasicStateQuery implements DispatcherQuery {
 
     public final int queryId;
     public final int firstSatId;

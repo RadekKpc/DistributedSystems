@@ -1,9 +1,11 @@
-import akka.actor.typed.ActorRef;
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
+import database.providerQueries.ErrorsForSatelliteResponse;
+import queries.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,21 +29,29 @@ public class MonitorStation extends AbstractBehavior<StationQuery> {
                 .onMessage(BasicStateResponse.class, this::onBasicStateResponse)
                 .onMessage(MonitorStationQuery.class, this::onMonitorStationQuery)
                 .onMessage(SetStationNameQuery.class, this::onSetStationNameQuery)
+                .onMessage(ErrorsForSatelliteResponse.class, this::onErrorsForSatelliteResponse)
                 .build();
     }
 
     private Behavior<StationQuery> onBasicStateResponse(BasicStateResponse response){
         long timeTaken = System.currentTimeMillis() - sendQueryTime.get(response.queryId);
-        System.out.println(name + " response in: " + timeTaken + " Errors: " + response.percentOfGoodTimeResponses);
-        response.errors.forEach((sat,value) -> System.out.println(name + ": " + "satelite " + sat + " error " + value));
+        System.out.println(name + " response in: " + timeTaken + " Good time: " + response.percentOfGoodTimeResponses);
+        response.errors.forEach((sat,value) -> System.out.println(name + ": " + "satellite " + sat + " error " + value));
         return this;
     }
 
     private Behavior<StationQuery> onMonitorStationQuery(MonitorStationQuery query){
         BasicStateQuery message = new BasicStateQuery(nextQueryId,query.firstSatId,query.range,query.timeout, getContext().getSelf());
-        query.dispatecher.tell(message);
+        query.dispatcher.tell(message);
         sendQueryTime.put(nextQueryId,System.currentTimeMillis());
         nextQueryId += 1;
+        return this;
+    }
+
+    private Behavior<StationQuery> onErrorsForSatelliteResponse(ErrorsForSatelliteResponse query){
+        if(query.satellite.getErrors() > 0){
+            System.out.println(name + ": " + "satellite " + query.satellite.getId() + " errors: " + query.satellite.getErrors());
+        }
         return this;
     }
 

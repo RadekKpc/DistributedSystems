@@ -1,8 +1,10 @@
+package queries;
+
 import java.util.Random;
 
 public class SatelliteAPI {
 
-    enum Status {
+    public enum Status {
 
         OK, BATTERY_LOW, PROPULSION_ERROR, NAVIGATION_ERROR
 
